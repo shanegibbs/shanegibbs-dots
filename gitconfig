@@ -1,0 +1,12 @@
+[user]
+	name = Shane Gibbs
+	email = shane@hands.net.nz
+[push]
+	default = current
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore
+[alias]
+  br = branch
+  co = checkout
+  st = status
