@@ -1,6 +1,12 @@
 #!/bin/bash -ex
 
-DOTS=`dirname "$(readlink -f $0)"`
+DOTS=$HOME/.shanegibbs-dots
+
+if [ ! -d "$DOTS" ]; then
+  git clone git@github.com:shanegibbs/shanegibbs-dots.git $DOTS
+fi
+
+# DOTS=`dirname "$(readlink -f $0)"`
 
 echo $DOTS
 
