@@ -10,3 +10,5 @@
   br = branch
   co = checkout
   st = status
+[branch]
+	autosetuprebase = always
