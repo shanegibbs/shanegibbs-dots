@@ -11,6 +11,7 @@ fi
 echo $DOTS
 
 ln -fs $DOTS/gitconfig $HOME/.gitconfig
+ln -fs $DOTS/gitignore $HOME/.gitignore
 ln -fs $DOTS/tmux.conf $HOME/.tmux.conf
 ln -fs $DOTS/vimrc $HOME/.vimrc
 ln -nfs $DOTS/vim $HOME/.vim
