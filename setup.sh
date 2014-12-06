@@ -3,7 +3,7 @@
 DOTS=$HOME/.shanegibbs-dots
 
 if [ ! -d "$DOTS" ]; then
-  git clone git@github.com:shanegibbs/shanegibbs-dots.git $DOTS
+  git clone --recursive git@github.com:shanegibbs/shanegibbs-dots.git $DOTS
 fi
 
 # DOTS=`dirname "$(readlink -f $0)"`
