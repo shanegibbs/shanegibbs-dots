@@ -56,7 +56,10 @@ unsetopt share_history
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export PATH=$HOME/opt/packer-0.6.0:$PATH
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
 export PATH=$HOME/bin:$PATH
 
