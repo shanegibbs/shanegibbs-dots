@@ -193,3 +193,5 @@ map <leader>w :w\|:!script/features --profile wip<cr>
 " commenting
 map <leader>cc :s/^/#/g<cr>:noh<cr>
 map <leader>cu :s/^#//g<cr>:noh<cr>
+
+nmap <F8> :TagbarToggle<CR>
