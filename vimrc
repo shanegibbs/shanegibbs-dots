@@ -93,9 +93,10 @@ set background=dark
 "colorscheme Tomorrow-Night
 "colorscheme candycode
 "colorscheme matrix
-colorscheme xoria256
 "colorscheme ir_black
 "colorscheme autumnleaf
+"colorscheme xoria256
+colorscheme molokai
 
 " Highlight word under cursor
 "autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
