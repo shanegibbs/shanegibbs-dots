@@ -61,8 +61,6 @@ if [ -d "$HOME/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
-export PATH=$HOME/bin:$PATH
-
 export LSCOLORS=exfxcxdxbxegedabagacad
 
 export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
@@ -74,8 +72,6 @@ alias md5sum='md5 -r'
 alias tmux='tmux -2'
 
 alias JSON.pretty_generate='ruby -r "json" -e "puts (JSON.pretty_generate JSON.parse(STDIN.read))"'
-
-alias tau="ssh -At tau 'tmux attach || tmux new'"
 
 export EDITOR=vim
 
@@ -97,3 +93,8 @@ fixssh() {
     fi
   done
 }
+
+# local local customizations
+if [ -e "$HOME/.zshrc-local" ]; then
+  source $HOME/.zshrc-local
+fi
