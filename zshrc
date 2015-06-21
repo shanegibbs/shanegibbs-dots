@@ -63,9 +63,6 @@ fi
 
 export LSCOLORS=exfxcxdxbxegedabagacad
 
-export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
-export VAGRANT_VMWARE_CLONE_DIRECTORY='~/Vagrant VMs'
-
 alias git-tree='git log --graph --simplify-by-decoration --pretty=format:"%d" --all'
 alias curl-json='curl -H "Accept: application/json; version=1"'
 alias md5sum='md5 -r'
