@@ -196,3 +196,5 @@ map <leader>cc :s/^/#/g<cr>:noh<cr>
 map <leader>cu :s/^#//g<cr>:noh<cr>
 
 nmap <F8> :TagbarToggle<CR>
+
+" let g:gitgutter_highlight_lines=1
