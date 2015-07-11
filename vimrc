@@ -108,9 +108,9 @@ function! TrimEndLines()
 endfunction
 
 au FileType ruby setl sw=2 sts=2 et
-au FileType c setl sw=4 sts=4 et
-au FileType cpp setl sw=4 sts=4 et
-au FileType h setl sw=4 sts=4 et
+au FileType c setl sw=2 sts=2 et
+au FileType cpp setl sw=2 sts=2 et
+au FileType h setl sw=2 sts=2 et
 
 let g:formatprg_c = "astyle"
 let g:formatprg_args_c = "--mode=c --style=1tbs --indent=spaces=4"
