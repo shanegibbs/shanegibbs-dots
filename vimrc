@@ -88,6 +88,16 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 ":set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
+" automatically populate the g:airline_symbols dictionary with the powerline
+" symbols - https://github.com/powerline/fonts
+let g:airline_powerline_fonts = 1
+
+" bring up the status line on load
+set laststatus=2
+
+" enable new theme colors for molokai
+let g:rehash256 = 1
+
 set t_Co=256
 set background=dark
 "colorscheme Tomorrow-Night
@@ -97,6 +107,9 @@ set background=dark
 "colorscheme autumnleaf
 "colorscheme xoria256
 colorscheme molokai
+
+" remove background for terminal transparencies
+hi Normal ctermbg=none
 
 " Highlight word under cursor
 "autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
