@@ -45,7 +45,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 #plugins=(git dircycle dircycle dirhistory git-extras screen ssh-agent)
-plugins=(git dircycle dircycle dirhistory)
+plugins=(git dircycle dircycle dirhistory ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -65,7 +65,7 @@ export LSCOLORS=exfxcxdxbxegedabagacad
 
 alias git-tree='git log --graph --simplify-by-decoration --pretty=format:"%d" --all'
 alias curl-json='curl -H "Accept: application/json; version=1"'
-alias md5sum='md5 -r'
+#alias md5sum='md5 -r'
 alias tmux='tmux -2'
 
 alias JSON.pretty_generate='ruby -r "json" -e "puts (JSON.pretty_generate JSON.parse(STDIN.read))"'
