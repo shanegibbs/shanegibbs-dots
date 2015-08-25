@@ -125,12 +125,12 @@ au FileType c setl sw=2 sts=2 et
 au FileType cpp setl sw=2 sts=2 et
 au FileType h setl sw=2 sts=2 et
 
-let g:formatprg_c = "astyle"
-let g:formatprg_args_c = "--mode=c --style=1tbs --indent=spaces=4"
-let g:formatprg_cpp = "astyle"
-let g:formatprg_args_cpp = "--mode=c --style=1tbs --indent=spaces=4"
-let g:formatprg_h = "astyle"
-let g:formatprg_args_h = "--mode=c --style=1tbs --indent=spaces=4"
+let g:formatprg_c = "clang-format"
+let g:formatprg_args_c = "-style=Google"
+let g:formatprg_cpp = "clang-format"
+let g:formatprg_args_cpp = "-style=Google"
+let g:formatprg_h = "clang-format"
+let g:formatprg_args_h = "-style=Google"
 nmap f :Autoformat<CR>
 " nmap f :Autoformat<CR>: call TrimEndLines()<CR>
 " nmap f :%!astyle --mode=c --style=1tbs --indent=spaces=4<CR>: call TrimEndLines()<CR>
