@@ -7,6 +7,8 @@ if [ ! -d "$DOTS" ]; then
 else
   cd $DOTS
   git pull
+  git submodule init
+  git submodule update
 fi
 
 # DOTS=`dirname "$(readlink -f $0)"`
