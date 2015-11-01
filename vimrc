@@ -102,11 +102,9 @@ set t_Co=256
 set background=dark
 "colorscheme Tomorrow-Night
 "colorscheme candycode
-"colorscheme matrix
-"colorscheme ir_black
-"colorscheme autumnleaf
 "colorscheme xoria256
-colorscheme molokai
+"colorscheme molokai
+colorscheme jellybeans
 
 " remove background for terminal transparencies
 hi Normal ctermbg=none
@@ -125,15 +123,12 @@ au FileType c setl sw=2 sts=2 et
 au FileType cpp setl sw=2 sts=2 et
 au FileType h setl sw=2 sts=2 et
 
-let g:formatprg_c = "clang-format"
-let g:formatprg_args_c = "-style=Google"
-let g:formatprg_cpp = "clang-format"
-let g:formatprg_args_cpp = "-style=Google"
-let g:formatprg_h = "clang-format"
-let g:formatprg_args_h = "-style=Google"
-nmap f :Autoformat<CR>
-" nmap f :Autoformat<CR>: call TrimEndLines()<CR>
-" nmap f :%!astyle --mode=c --style=1tbs --indent=spaces=4<CR>: call TrimEndLines()<CR>
+noremap f :Autoformat<CR>
+let g:formatdef_my_custom_c = '"clang-format -style=file"'
+let g:formatters_h = ['my_custom_c']
+let g:formatters_c = ['my_custom_c']
+let g:formatters_cpp = ['my_custom_c']
+let g:formatters_hpp = ['my_custom_c']
 
 nmap <S-Enter> O<Esc>
 
