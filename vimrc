@@ -104,7 +104,11 @@ set background=dark
 "colorscheme candycode
 "colorscheme xoria256
 "colorscheme molokai
-colorscheme jellybeans
+if $ITERM_PROFILE == "Shane - Light"
+  colorscheme Tomorrow
+else
+  colorscheme jellybeans
+endif
 
 " remove background for terminal transparencies
 hi Normal ctermbg=none
@@ -206,3 +210,9 @@ map <leader>cu :s/^#//g<cr>:noh<cr>
 nmap <F8> :TagbarToggle<CR>
 
 " let g:gitgutter_highlight_lines=1
+
+" auto load files on changing buffer
+set autoread
+
+" automatic running of :RustFmt
+let g:rustfmt_autosave = 1
