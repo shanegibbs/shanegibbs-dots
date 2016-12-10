@@ -23,4 +23,3 @@ ln -nfs $DOTS/vim $HOME/.vim
 ln -fs $DOTS/zshrc $HOME/.zshrc
 ln -nfs $DOTS/oh-my-zsh $HOME/.oh-my-zsh
 ln -nfs $DOTS/oh-my-zsh-custom $HOME/.oh-my-zsh-custom
-ln -fs $DOTS/shanegibbs.zsh-theme $HOME/.oh-my-zsh/themes/shanegibbs.zsh-theme
