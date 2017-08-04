@@ -3,7 +3,7 @@
 DOTS=$HOME/.shanegibbs-dots
 
 if [ ! -d "$DOTS" ]; then
-  git clone --recursive git@github.com:shanegibbs/shanegibbs-dots.git $DOTS
+  git clone --recursive https://github.com/shanegibbs/shanegibbs-dots.git $DOTS
 else
   cd $DOTS
   git pull
