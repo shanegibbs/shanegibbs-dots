@@ -20,6 +20,3 @@ ln -fs $DOTS/gitignore $HOME/.gitignore
 ln -fs $DOTS/tmux.conf $HOME/.tmux.conf
 ln -fs $DOTS/vimrc $HOME/.vimrc
 ln -nfs $DOTS/vim $HOME/.vim
-ln -fs $DOTS/zshrc $HOME/.zshrc
-ln -nfs $DOTS/oh-my-zsh $HOME/.oh-my-zsh
-ln -nfs $DOTS/oh-my-zsh-custom $HOME/.oh-my-zsh-custom
