@@ -1,218 +1,228 @@
-set nocompatible
-syntax on
-
-if &term =~ '256color'
-  set t_ut=
-endif
-
-" enable per-directory .vimrc files
-set exrc
-" disable unsafe commands in local .vimrc files
-set secure
-
-" font
-"set gfn=Monaco:h12
-set gfn=Menlo:h12
-
-filetype off
-call pathogen#infect()
-filetype plugin indent on
-
-" enable mouse
-set mouse=a
-set ttymouse=xterm2
-
-" autocomplete for c
-set tags+=~/.vim/tags/glib-2.0
-
-" remove scrollbars in gvim
-set guioptions+=LlRrb
-set guioptions-=LlRrb
-set guioptions-=T
-
-set autoread " watch for file changes
-
+set nocompatible " required
+filetype off " required
 set encoding=utf-8
-set autoindent
-"set nosmartindent
-set history=10000
-set number
-set hidden
+
+" Remember past commands etc
+set viminfo=%,<800,'10,/50,:100,h,f0,n~/.viminfo
+
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+
+" Ctrl-C to copy, Ctrl-P to paste to and from clipboard
+nnoremap <C-p> "+gP
+nnoremap <C-c> "+y
+
+" allow backspacing over everything
 set backspace=indent,eol,start
-set textwidth=0
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
-nnoremap <leader>aa :Ack<space>
-
-"set cursorline
-set wrap
-set noswapfile
-set bs=2
-
-set wildignore+=reports/**
-set wildmenu
-
-"set winwidth=90
-"set winminwidth=15
-"set winheight=5
-"set winminheight=5
-"set winheight=999
-
-" Highlight trailing whitespace
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
-
-" Set up highlight group & retain through colorscheme changes
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
-
-" Highlight too-long lines
-autocmd BufRead,InsertEnter,InsertLeave * 2match LineLengthError /\%126v.*/
-highlight LineLengthError ctermbg=black guibg=black
-autocmd ColorScheme * highlight LineLengthError ctermbg=black guibg=black
-
-" set quickfix window to appear after grep invocation
-autocmd QuickFixCmdPost *grep* cwindow
-
-":set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-
-" automatically populate the g:airline_symbols dictionary with the powerline
-" symbols - https://github.com/powerline/fonts
-let g:airline_powerline_fonts = 1
-
-" bring up the status line on load
-set laststatus=2
-
-" enable new theme colors for molokai
-let g:rehash256 = 1
-
-set t_Co=256
-set background=dark
-"colorscheme Tomorrow-Night
-"colorscheme candycode
-"colorscheme xoria256
-"colorscheme molokai
-if $ITERM_PROFILE == "Shane - Light"
-  colorscheme Tomorrow
-else
-  colorscheme jellybeans
+if has("gui_running")
+	set guifont=DejaVu\ Sans\ Mono\ 12
+	" set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 12
+	" set guifont=Meslo\ LG\ S\ DZ\ for\ Powerline\ 11
+	" set guifont=TerminessTTF\ Nerd\ Font\ Mono\ 13
 endif
 
-" remove background for terminal transparencies
-hi Normal ctermbg=none
-
-" Highlight word under cursor
-"autocmd CursorMoved * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-
-function! TrimEndLines()
-  let save_cursor = getpos(".")
-  :silent! %s#\($\n\s*\)\+\%$##
-  call setpos('.', save_cursor)
+" Change font size shortcuts
+let s:pattern = '^\(.* \)\([1-9][0-9]*\)$'
+let s:minfontsize = 6
+let s:maxfontsize = 16
+function! AdjustFontSize(amount)
+  if has("gui_running")
+    let fontname = substitute(&guifont, s:pattern, '\1', '')
+    let cursize = substitute(&guifont, s:pattern, '\2', '')
+    let newsize = cursize + a:amount
+    if (newsize >= s:minfontsize) && (newsize <= s:maxfontsize)
+      let newfont = fontname . newsize
+      let &guifont = newfont
+    endif
+  else
+    echoerr "You need to run the GTK2 version of Vim to use this function."
+  endif
 endfunction
 
-au FileType ruby setl sw=2 sts=2 et
-au FileType c setl sw=2 sts=2 et
-au FileType cpp setl sw=2 sts=2 et
-au FileType h setl sw=2 sts=2 et
+function! LargerFont()
+  call AdjustFontSize(1)
+endfunction
+command! LargerFont call LargerFont()
 
-noremap f :Autoformat<CR>
-let g:formatdef_my_custom_c = '"clang-format -style=file"'
-let g:formatters_h = ['my_custom_c']
-let g:formatters_c = ['my_custom_c']
-let g:formatters_cpp = ['my_custom_c']
-let g:formatters_hpp = ['my_custom_c']
+function! SmallerFont()
+  call AdjustFontSize(-1)
+endfunction
+command! SmallerFont call SmallerFont()
 
-nmap <S-Enter> O<Esc>
 
-" Keymaps
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" For local replace
-nnoremap gr gd[{V%::s/<C-R>///gc<left><left><left>
-" For global replace
-nnoremap gR gD:%s/<C-R>///gc<left><left><left>
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
 
-map <silent> <LocalLeader>1 :make<CR>
-map <silent> <LocalLeader>2 :make -s check<CR>
-map <silent> <LocalLeader>3 :! G_MESSAGES_DEBUG=Babirusa ./src/bin/babirusa -p test<CR>
-map <silent> <LocalLeader>4 :! valgrind ./src/bin/babirusa -p test<CR>
+" tomorrow themes
+Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 
-nmap , \
-map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
-map <silent> <LocalLeader>nr :NERDTree<CR>
-map <silent> <LocalLeader>nf :NERDTreeFind<CR>
-map <silent> <LocalLeader>t :CtrlP<CR>
-imap <C-L> <SPACE>=><SPACE>
+" scroll through color schemes with Ctrl-b and Ctrl-m
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-colorscheme-switcher'
+"nnoremap <C-b> :PrevColorScheme<CR>
+"nnoremap <C-m> :NextColorScheme<CR>
 
-let g:CommandTAcceptSelectionSplitMap=['<C-s>']
-let g:CommandTAcceptSelectionVSplitMap=['<C-v>']
-let g:CommandTCancelMap=['<Esc>', '<C-c>']
-let g:CommandTMaxHeight=10
+" git modifications in gutter
+Plugin 'airblade/vim-gitgutter'
+" update gitgutter on save
+autocmd BufWritePost * GitGutter
 
-" copy and paste to clipboard
-noremap <leader>y "*y
-noremap <leader>p :set paste<CR>"*p<CR>:set nopaste<CR>
-noremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
-vnoremap <leader>y "*ygv
+" enhanced terminal support. For tmux etc
+Plugin 'wincent/terminus'
 
-" better j,k
-noremap j gj
-noremap k gk
-noremap gj j
-noremap gk k
+" indent on functions etc
+Plugin 'vim-scripts/indentpython.vim'
 
-" clean trailing whitespace
-nnoremap <leader>ww mz:%s/\s\+$//<cr>:let @/=''<cr>`z
+" ALE
+Plugin 'w0rp/ale'
+" Only run linters named in ale_linters settings.
+let g:ale_linters_explicit = 1
+let g:ale_linters = {'python': ['pyls', 'autopep8', 'flake8', 'pylint', 'python']}
+let g:ale_fixers = {'python': ['add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace', 'isort', 'autopep8']}
+" Enable completion where available.
+let g:ale_completion_enabled = 1
+" Set this variable to 1 to fix files when you save them.
+let g:ale_fix_on_save = 1
 
-" emacs bindings in command line mode
-cnoremap <c-a> <home>
-cnoremap <c-e> <end>
+" Nerdtree file browser
+" https://github.com/scrooloose/nerdtree
+Plugin 'scrooloose/nerdtree'
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
-" keep the cursor in place while joining lines
-nnoremap J mzJ`z
+" Nerdtree git things
+" https://github.com/Xuyuanp/nerdtree-git-plugin
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 
-" split line
-nnoremap S i<cr><esc>^mwgk:silent! s/\v +$//<cr>:noh<cr>`w
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
-" disable help
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
+let python_highlight_all=1
+syntax on
 
-" HTML tag folding
-nnoremap <leader>ft Vatzf
+" theme
+"if has("gui_running")
+"else
+"endif
 
-" CSS properties sorting
-nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR>
+" Dark Theme
+colorscheme Tomorrow-Night
+highlight ALEWarning ctermbg=DarkMagenta
 
-" key mappings for running tests
-map <leader>r :call RunTestFile()<cr>
-map <leader>R :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
-map <leader>c :w\|:!script/features<cr>
-map <leader>w :w\|:!script/features --profile wip<cr>
+" Light Theme
+"colorscheme Tomorrow
+"highlight ALEWarning ctermbg=LightMagenta
 
-" commenting
-map <leader>cc :s/^/#/g<cr>:noh<cr>
-map <leader>cu :s/^#//g<cr>:noh<cr>
+" 80 char column
+"highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
+"set colorcolumn=80
 
-nmap <F8> :TagbarToggle<CR>
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
-" let g:gitgutter_highlight_lines=1
 
-" auto load files on changing buffer
-set autoread
+set switchbuf=usetab,newtab
 
-" automatic running of :RustFmt
-let g:rustfmt_autosave = 1
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+"nnoremap <Leader>l :ls<CR>
+"nnoremap <Leader>b :bp<CR>
+"nnoremap <Leader>f :bn<CR>
+"nnoremap <Leader>g :e#<CR>
+"nnoremap <Leader>1 :1b<CR>
+"nnoremap <Leader>2 :2b<CR>
+"nnoremap <Leader>3 :3b<CR>
+"nnoremap <Leader>4 :4b<CR>
+"nnoremap <Leader>5 :5b<CR>
+"nnoremap <Leader>6 :6b<CR>
+"nnoremap <Leader>7 :7b<CR>
+"nnoremap <Leader>8 :8b<CR>
+"nnoremap <Leader>9 :9b<CR>
+"nnoremap <Leader>0 :10b<CR>
+" It's useful to show the buffer number in the status line.
+"set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+
+" Mappings to access tabs (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+"nnoremap <Leader>l :ls<CR>
+nnoremap <C-Left>  :tabp<CR>
+nnoremap <C-Right> :tabn<CR>
+nnoremap <S-Left>  :-tabmove<CR>
+nnoremap <S-Right> :+tabmove<CR>
+"nnoremap <Leader>g :e#<CR>
+nnoremap <C-1> 1gt
+nnoremap <C-2> 2gt
+"nnoremap <Leader>3 :3b<CR>
+"nnoremap <Leader>4 :4b<CR>
+"nnoremap <Leader>5 :5b<CR>
+"nnoremap <Leader>6 :6b<CR>
+"nnoremap <Leader>7 :7b<CR>
+"nnoremap <Leader>8 :8b<CR>
+"nnoremap <Leader>9 :9b<CR>
+"nnoremap <Leader>0 :10b<CR>
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" PEP 8 indentation
+au BufNewFile,BufRead *.py set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css set
+    \ tabstop=2
+    \ softtabstop=2
+    \ shiftwidth=2
+
+" flag white space
+"au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+" remember last cursor position when opening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+
+"activate python virtualenv
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" show the matching pair of braces
+set showmatch
+
+" Show line under cursor
+set cursorline
+
+" Enable mouse
+set mouse=a
