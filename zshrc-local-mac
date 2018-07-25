@@ -1,9 +1,0 @@
-source $HOME/.cargo/env
-
-# for vim racer plugin
-export RUST_SRC_PATH="$HOME/.multirust/toolchains/nightly-x86_64-apple-darwin/lib/rustlib/src/rust"
-
-# need openssl config for cargo builds
-export OPENSSL_INCLUDE_DIR=`brew --prefix openssl`/include
-export OPENSSL_LIB_DIR=`brew --prefix openssl`/lib
-export DEP_OPENSSL_INCLUDE=${OPENSSL_INCLUDE_DIR}
