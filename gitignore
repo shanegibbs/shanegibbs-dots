@@ -2,3 +2,6 @@
 /sgibbs*
 /*.xcodeproj
 /.vscode
+venv
+__pycache__
+.ipynb_checkpoints
