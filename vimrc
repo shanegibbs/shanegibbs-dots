@@ -209,7 +209,7 @@ if has("autocmd")
 endif
 
 "activate python virtualenv
-py << EOF
+py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
