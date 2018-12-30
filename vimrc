@@ -81,9 +81,13 @@ Plugin 'vim-scripts/indentpython.vim'
 " ALE
 Plugin 'w0rp/ale'
 " Only run linters named in ale_linters settings.
-let g:ale_linters_explicit = 1
-let g:ale_linters = {'python': ['pyls', 'autopep8', 'flake8', 'pylint', 'python']}
-let g:ale_fixers = {'python': ['add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace', 'isort', 'autopep8']}
+"let g:ale_linters_explicit = 1
+let g:ale_linters = {'python': ['pyls', 'autopep8', 'flake8', 'pylint', 'python'],'rust':['rls']}
+
+let g:ale_rust_rls_toolchain = 'stable'
+
+let g:ale_fixers = {'python': ['add_blank_lines_for_python_control_statements', 'remove_trailing_lines', 'trim_whitespace', 'isort', 'autopep8'],'rust':['rustfmt','trim_whitespace']}
+
 " Enable completion where available.
 let g:ale_completion_enabled = 1
 " Set this variable to 1 to fix files when you save them.
@@ -114,12 +118,16 @@ syntax on
 "endif
 
 " Dark Theme
-colorscheme Tomorrow-Night
-highlight ALEWarning ctermbg=DarkMagenta
+colorscheme Tomorrow-Night-Bright
+highlight ALEError term=standout ctermfg=15 ctermbg=1 guifg=White guibg=Red
+highlight ALEWarning term=reverse ctermbg=239 guibg=#585858
 
 " Light Theme
 "colorscheme Tomorrow
 "highlight ALEWarning ctermbg=LightMagenta
+
+" Transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 " 80 char column
 "highlight ColorColumn ctermbg=darkgrey guibg=darkgrey
@@ -131,6 +139,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
+nnoremap <Leader>d :ALEGoToDefinition<CR>
 
 set switchbuf=usetab,newtab
 
