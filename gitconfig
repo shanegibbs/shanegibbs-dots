@@ -1,6 +1,7 @@
 [user]
 	name = Shane Gibbs
 	email = shane@hands.net.nz
+	signingkey = 599F65D0385A9315
 [push]
 	default = current
 [core]
@@ -15,3 +16,5 @@
   lg = !"git lg1"
 [branch]
 	autosetuprebase = always
+[commit]
+	gpgsign = true
