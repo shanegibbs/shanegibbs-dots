@@ -4,11 +4,6 @@ DOTS=$HOME/.shanegibbs-dots
 
 if [ ! -d "$DOTS" ]; then
   git clone --recursive https://github.com/shanegibbs/shanegibbs-dots.git $DOTS
-else
-  cd $DOTS
-  git pull
-  git submodule init
-  git submodule update
 fi
 
 # DOTS=`dirname "$(readlink -f $0)"`
