@@ -50,36 +50,13 @@ function! SmallerFont()
 endfunction
 command! SmallerFont call SmallerFont()
 
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
-" tomorrow themes
-Plugin 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
-
-" scroll through color schemes with Ctrl-b and Ctrl-m
-Plugin 'xolox/vim-misc'
-Plugin 'xolox/vim-colorscheme-switcher'
-"nnoremap <C-b> :PrevColorScheme<CR>
-"nnoremap <C-m> :NextColorScheme<CR>
-
-" git modifications in gutter
-Plugin 'airblade/vim-gitgutter'
-" update gitgutter on save
+" update gitgutter plugin on save
 autocmd BufWritePost * GitGutter
 
-" enhanced terminal support. For tmux etc
-Plugin 'wincent/terminus'
-
-" indent on functions etc
-Plugin 'vim-scripts/indentpython.vim'
-
+" " indent on functions etc
+" Plugin 'vim-scripts/indentpython.vim'
+"
 " ALE
-Plugin 'w0rp/ale'
 " Only run linters named in ale_linters settings.
 "let g:ale_linters_explicit = 1
 let g:ale_linters = {'python': ['pyls', 'autopep8', 'flake8', 'pylint', 'python'],'rust':['rls']}
@@ -94,20 +71,12 @@ let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 
 " Nerdtree file browser
-" https://github.com/scrooloose/nerdtree
-Plugin 'scrooloose/nerdtree'
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-" Nerdtree git things
-" https://github.com/Xuyuanp/nerdtree-git-plugin
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on
 
 let python_highlight_all=1
 syntax on

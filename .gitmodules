@@ -1,3 +1,18 @@
-[submodule "vim/bundle/Vundle.vim"]
-	path = vim/bundle/Vundle.vim
-	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "vim/pack/git-plugins/start/gitgutter"]
+	path = vim/pack/git-plugins/start/gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "vim/pack/git-plugins/start/nerdtree"]
+	path = vim/pack/git-plugins/start/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "vim/pack/git-plugins/start/nerdtree-git"]
+	path = vim/pack/git-plugins/start/nerdtree-git
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "vim/pack/git-plugins/start/terminus"]
+	path = vim/pack/git-plugins/start/terminus
+	url = https://github.com/wincent/terminus.git
+[submodule "vim/tomorrow-theme"]
+	path = vim/tomorrow-theme
+	url = https://github.com/chriskempson/tomorrow-theme.git
+[submodule "vim/pack/git-plugins/start/ale"]
+	path = vim/pack/git-plugins/start/ale
+	url = https://github.com/w0rp/ale.git
