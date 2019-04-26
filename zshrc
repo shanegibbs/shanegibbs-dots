@@ -1,5 +1,11 @@
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 export EDITOR=vim
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -19,9 +25,6 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
 bindkey "^[." insert-last-word
 
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-
 alias ls='ls --color'
 alias l='ls -l'
 alias ll='ls -al'
@@ -29,11 +32,7 @@ alias ll='ls -al'
 alias docker-host='docker run --rm -it --privileged --pid=host ubuntu nsenter -t 1 -m -u -n -i sh'
 
 export GPG_TTY=$(tty)
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+export SSH_AUTH_SOCK="$HOME/.ssh-agent.socket"
 
 if [ "$TERM" = "screen-256color" ] && [ -n "$TMUX" ]
 then
