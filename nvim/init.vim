@@ -4,22 +4,38 @@ Plug 'fatih/vim-go'
 Plug 'vim-airline/vim-airline'
 Plug 'preservim/tagbar'
 Plug 'joshdick/onedark.vim'
+Plug 'rakr/vim-one'
 Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
 call plug#end()
 
 set mouse=a
-set number
 set ignorecase
 set incsearch
 
+"numbering and relative numbering
+set nu rnu
+
 syntax on
 
-let g:onedark_terminal_italics=1
-let g:airline_theme='onedark'
+" https://github.com/joshdick/onedark.vim
+"let g:onedark_terminal_italics=1
+"let g:airline_theme='onedark'
+"colorscheme onedark
 
-colorscheme onedark
+colorscheme one
+set background=light
+"call one#highlight('Normal', '', '282c34', 'none')
 
 let g:airline#extensions#tabline#enabled = 1
+
+
+"disable arrow keys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
 
 nmap <F8> :TagbarToggle<CR>
 
