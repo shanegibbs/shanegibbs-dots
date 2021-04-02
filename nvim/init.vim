@@ -7,6 +7,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'rakr/vim-one'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set mouse=a
